@@ -6,9 +6,9 @@ export const createBrand = async (req , res) => {
     try {
         
            const {name, description } = req.body;
-
+        
            if (req.file) {
-            const result = await uploadImage(req.file.path);
+            const result = await uploadImage(req.file);
             logoUrl = result.secure_url;
            }
 

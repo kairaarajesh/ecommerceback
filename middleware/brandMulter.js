@@ -34,11 +34,9 @@ const uploadImage = async (filePath) => {
     try {
         const result = await cloudinary.uploader
         .upload(filePath.path, {
-            folder: "Brand", // Optional: specify a folder
-            resource_type: "image" // Automatically detects image vs video
+            folder: "Brand",
+            resource_type: "image"
         });
-        
-        console.log('Upload successful! URL:', result.secure_url);
         return result;
 
     } catch (error) {

@@ -4,6 +4,10 @@ import connectdb from "./database/db.js";
 
 // routes api cpnnect server
 import brandRoutes from "./routes/brandRoutes.js";
+// import productRoutes from "./routes/productRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+import taxRoutes from "./routes/taxRoutes.js";
+import shippingRoutes from "./routes/shippingRoutes.js"
 
 
 dotenv.config();
@@ -24,3 +28,7 @@ app.listen(port, async () => {
 app.use(express.json());
 
 app.use("/api/brand", brandRoutes);
+// app.use("/api/product", productRoutes);
+app.use("/api/category", categoryRoutes);
+app.use("/api/tax", taxRoutes);
+app.use("/api/shipping", shippingRoutes);

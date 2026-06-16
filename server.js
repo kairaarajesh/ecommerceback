@@ -3,11 +3,17 @@ import dotenv from "dotenv";
 import connectdb from "./database/db.js";
 
 // routes api cpnnect server
+import adminRoutes from "./routes/adminRoutes.js";
 import brandRoutes from "./routes/brandRoutes.js";
 // import productRoutes from "./routes/productRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import taxRoutes from "./routes/taxRoutes.js";
-import shippingRoutes from "./routes/shippingRoutes.js"
+import shippingRoutes from "./routes/shippingRoutes.js";
+
+
+// giftCard
+import giftcardRoutes from "./routes/giftcardRoutes.js"
+
 
 
 dotenv.config();
@@ -27,8 +33,12 @@ app.listen(port, async () => {
 
 app.use(express.json());
 
+app.use("/api/admin", adminRoutes);
 app.use("/api/brand", brandRoutes);
 // app.use("/api/product", productRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/tax", taxRoutes);
 app.use("/api/shipping", shippingRoutes);
+
+// gift
+app.use("/api/gift", giftcardRoutes);

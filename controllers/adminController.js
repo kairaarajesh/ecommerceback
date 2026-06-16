@@ -1,9 +1,10 @@
 import {Admin} from "../models/admin.js";
 import bcrypt from "bcrypt";
 
+
 export const createAdmin = async (req, res) => {
     try{
-    const { name, email, password,role } = req.body;
+    const { name, email, password,role, permissions } = req.body;
 
      const existingAdmin = await Admin.findOne({ email });
      if (existingAdmin) { return res.status(400).json({ message: "Email already exists" }); } 
@@ -16,7 +17,7 @@ export const createAdmin = async (req, res) => {
     password: hashPassword,
     role,
     status: "active",
-    permissions:{}
+    permissions: permissions || {}
    });
   
    const adminData = await admin.save();
@@ -25,12 +26,12 @@ export const createAdmin = async (req, res) => {
    const adminResponse = adminData.toObject();
    delete adminResponse.password;
   
-   const token = admin.getJwtToken();
+  //  const token = admin.getJwtToken();
    
    return res.status(201).json({
     message: "Admin Create successfully",
     data: adminResponse,
-    token
+    // token
    });
   } 
   catch (error) {
@@ -140,6 +141,9 @@ export const loginAdmin = async (req, res) => {
             Date.now() + 3 * 24 * 60 * 60 * 1000   //  3 days
           ),
           httpOnly: true,
+           secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+
         }).json({
             message: "Login successful",
             data: adminResponse,

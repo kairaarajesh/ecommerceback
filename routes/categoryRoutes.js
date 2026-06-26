@@ -9,5 +9,5 @@ router.post("/create", brandMulter.fields([{ name: "cimage", maxCount: 1 },{ nam
 router.get("/all", getAllCategory);
 router.put("/update/:id", brandMulter.fields([{ name: "cimage", maxCount: 1 },{ name: "image", maxCount: 10 }]), updateCategory);
 router.delete("/delete/:id", deleteCategory);
-
+    
 export default router;

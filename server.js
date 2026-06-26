@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectdb from "./database/db.js";
+import cors from "cors";
 
 // routes api cpnnect server
 import adminRoutes from "./routes/adminRoutes.js";
@@ -24,12 +25,18 @@ const port = process.env.PORT || 5000;
 app.listen(port, async () => {
     try {
         await connectdb();
-        console.log(`Server is running on port  ${port}`);
+        // console.log(`Server is running on port  ${port}`);
     }catch(error) {
          console.error("Database connection error:", error);
     }
 });
     
+
+app.use(express.static("."));
+app.use(cors());
+app.listen(7000, () => {
+  console.log("Server is running on http://localhost:7000");
+});
 
 app.use(express.json());
 

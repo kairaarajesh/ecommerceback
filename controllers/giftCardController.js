@@ -69,37 +69,44 @@ export const createAll = async (req, res) => {
       .skip(skip)
       .limit(limit);
 
-      const formattedGifts = gift.map((gift) => {
+    const formattedGifts = gift.map((gift) => {
       const obj = gift.toObject();
 
-      obj.created_at = new Date(obj.createdAt).toLocaleString(
-        "en-IN",
-        {
-          timeZone: "Asia/Kolkata",
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        }
-      );
+      obj.created_at = new Date(obj.createdAt).toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
 
       return obj;
     });
 
-    return res
-      .status(201)
-      .json({
-        Message: "Get All giftCard",
-        currentPage: page,
-        totalPages: Math.ceil(totalGift / limit),
-        totalGift,
-        gift: formattedGifts,
-      });
+    const totalPreviousBalance = formattedGifts.reduce(
+      (sum, item) => sum + (item.previous_balance || 0),
+      0,
+    );
+
+    const totalCurrentBalance = formattedGifts.reduce(
+      (sum, item) => sum + (item.current_balance || 0),
+      0,
+    );
+    const grandTotal = totalPreviousBalance + totalCurrentBalance;
+
+    return res.status(201).json({
+      Message: "Get All giftCard",
+      currentPage: page,
+      totalPages: Math.ceil(totalGift / limit),
+      totalGift,
+      gift: formattedGifts,
+     grandTotal: grandTotal.toFixed(2),
+    });
   } catch (error) {
-    console.log("==",error)
+    console.log("==", error);
     res.status(500).json({ Message: "Server Error" });
   }
 };

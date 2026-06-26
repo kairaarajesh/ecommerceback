@@ -6,7 +6,7 @@ import {createGift, createAll} from "../controllers/giftCardController.js"
 const router = express.Router();
 
 router.post("/create",createGift);
-router.get("/all",createAll);
+router.get("/giftall",createAll);
 
 export default router;
 

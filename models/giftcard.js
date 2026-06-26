@@ -11,9 +11,8 @@ const giftCardSchema = new mongoose.Schema({
     description :{ type : String},
     previous_balance : {type :Number},
     current_balance : {type :Number},
-    payment_mode:{ String},
+    payment_mode:{type : String},
 
 },{timestamps : true}); 
 
 export const giftcards = mongoose.model("giftcards", giftCardSchema);
-

@@ -44,8 +44,8 @@ export const getAllBrand = async(req, res) => {
         const brand = await brands.find()
         .skip(skip).limit(limit).sort({ _id: -1 });
 
-        return res.status(201).json({ Message: "Get All Brand",
-            currentPage:page,
+        return res.status(200).json({ Message: "Get All Brand",
+             currentPage:page,
              totalPages: Math.ceil(totalBrands / limit),
              totalBrands,
              limit,

@@ -1,7 +1,6 @@
 import {Admin} from "../models/admin.js";
 import bcrypt from "bcrypt";
 
-
 export const createAdmin = async (req, res) => {
     try{
     const { name, email, password,role, permissions } = req.body;

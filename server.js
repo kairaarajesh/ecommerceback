@@ -10,10 +10,10 @@ import brandRoutes from "./routes/brandRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import taxRoutes from "./routes/taxRoutes.js";
 import shippingRoutes from "./routes/shippingRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 
-// giftCard
-import giftcardRoutes from "./routes/giftcardRoutes.js"
+
 
 
 
@@ -46,6 +46,5 @@ app.use("/api/brand", brandRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/tax", taxRoutes);
 app.use("/api/shipping", shippingRoutes);
+app.use("/api/user",userRoutes)
 
-// gift
-app.use("/api/gift", giftcardRoutes);
